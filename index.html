@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./style.css">
+    <title><2048></title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="game">
+        <div class="game__table">
+          <div v-for="(cell, idx) in table" :key="idx" class="game__cell">
+            {{ cell }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>

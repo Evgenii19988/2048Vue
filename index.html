@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="./style.css">
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./style.css" />
     <title><2048></title>
   </head>
   <body>
     <div class="wrapper">
       <div class="game">
         <div class="game__table">
-          <div v-for="(cell, idx) in table" :key="idx" class="game__cell">
+          <div
+            v-bind:class="{value2: cell === 2,
+            value4: cell === 4,
+            value8:cell===8,
+            value16:cell===16,
+            value32:cell===32,
+            value64:cell===64,
+            value128:cell===128,
+            value256:cell===256,
+            value512:cell===512,
+            value1024:cell===1024,
+            value2048:cell===2048}"
+            v-for="(cell, idx) in table"
+            :key="idx"
+            class="game__cell"
+          >
             {{ cell }}
           </div>
         </div>

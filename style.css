@@ -92,16 +92,55 @@ select {
 
 .game__table {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 150px);
+  grid-template-rows: repeat(4, 150px);
   grid-gap: 5px;
   border: 1px solid black;
   padding: 5px;
-  background-color: cadetblue;
+  background-color: #4a4444;
 }
 
 .game__cell {
-  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
   border: 1px solid black;
-  background-color: blanchedalmond;
+  background-color: #9e9d9d;
+}
+
+/*Значения*/
+
+.value2 {
+  background-color: #fffafa;
+}
+.value4 {
+  background-color: #fcf9d7;
+}
+.value8 {
+  background-color: #e1b55d;
+}
+.value16 {
+  background-color: #db9442;
+}
+.value32 {
+  background-color: #f24713;
+}
+.value64 {
+  background-color: #eb2121;
+}
+.value128 {
+  background-color: #f2ff66;
+}
+.value256 {
+  background-color: #e5f53b;
+}
+.value512 {
+  background-color: #8e9914;
+}
+.value1024 {
+  background-color: #636b09;
+}
+.value2048 {
+  background-color: #690404;
 }

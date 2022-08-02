@@ -5,23 +5,24 @@ const App = {
   data() {
     return {
       table: [
+        2,
         null,
         null,
         null,
+        128,
         null,
         null,
         null,
+        2,
         null,
         null,
         null,
-        null,
-        null,
-        null,
-        null,
+        2,
         null,
         null,
         null
-      ]
+      ],
+      prevTable: []
     };
   },
 
@@ -58,7 +59,7 @@ const App = {
       if ([valueA, valueB, valueC, valueD].length === 0) {
         return;
       }
-      /*Если одно значение в строке*/
+      /*Если 1 значение в строке*/
       if (
         [valueA, valueB, valueC, valueD].filter((val) => val !== null)
           .length === 1
@@ -78,7 +79,7 @@ const App = {
         this.table.splice(idxArray[deleteIndex], 1, null);
       }
 
-      /*Если два значения в строке*/
+      /*Если 2 значения в строке*/
       if (
         [valueA, valueB, valueC, valueD].filter((val) => val !== null)
           .length === 2
@@ -139,7 +140,7 @@ const App = {
 
         if (valueD === valueC && valueA !== valueB) {
           this.table.splice(d, 1, valueD * 2);
-          this.table.splice(c, 1, valueC);
+          this.table.splice(c, 1, valueB);
           this.table.splice(b, 1, valueA);
           this.table.splice(a, 1, null);
         }
@@ -180,32 +181,53 @@ const App = {
     document.addEventListener("keydown", (event) => {
       switch (event.key) {
         case "ArrowDown":
+          this.prevTable = this.table.concat();
           this.moveCells(0, 4, 8, 12);
           this.moveCells(1, 5, 9, 13);
           this.moveCells(2, 6, 10, 14);
           this.moveCells(3, 7, 11, 15);
-          this.fillCell();
+
+          if (
+            !(JSON.stringify(this.prevTable) === JSON.stringify(this.table))
+          ) {
+            this.fillCell();
+          }
           break;
         case "ArrowLeft":
+          this.prevTable = this.table.concat();
           this.moveCells(3, 2, 1, 0);
           this.moveCells(7, 6, 5, 4);
           this.moveCells(11, 10, 9, 8);
           this.moveCells(15, 14, 13, 12);
-          this.fillCell();
+          if (
+            !(JSON.stringify(this.prevTable) === JSON.stringify(this.table))
+          ) {
+            this.fillCell();
+          }
           break;
         case "ArrowUp":
+          this.prevTable = this.table.concat();
           this.moveCells(12, 8, 4, 0);
           this.moveCells(13, 9, 5, 1);
           this.moveCells(14, 10, 6, 2);
           this.moveCells(15, 11, 7, 3);
-          this.fillCell();
+          if (
+            !(JSON.stringify(this.prevTable) === JSON.stringify(this.table))
+          ) {
+            this.fillCell();
+          }
           break;
         case "ArrowRight":
+          this.prevTable = this.table.concat();
           this.moveCells(0, 1, 2, 3);
           this.moveCells(4, 5, 6, 7);
           this.moveCells(8, 9, 10, 11);
           this.moveCells(12, 13, 14, 15);
-          this.fillCell();
+          if (
+            !(JSON.stringify(this.prevTable) === JSON.stringify(this.table))
+          ) {
+            this.fillCell();
+          }
           break;
         default:
           return;

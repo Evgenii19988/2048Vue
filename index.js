@@ -5,19 +5,19 @@ const App = {
   data() {
     return {
       table: [
-        2,
         null,
         null,
         null,
-        128,
         null,
         null,
         null,
-        2,
         null,
         null,
         null,
-        2,
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         null

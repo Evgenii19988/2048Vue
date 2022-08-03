@@ -14,11 +14,15 @@
   <body>
     <div class="wrapper">
       <div class="title">2048</div>
+      <div class="management">
+        <button v-on:click="rebootGame" class="reboot">Заново</button>
+        <button v-on:click="stepBack">Назад</button>
+      </div>
       <div class="game">
         <div class="game__table">
           <div
-            v-bind:class="{value2: cell === 2,
-            value4: cell === 4,
+            v-bind:class="{value2:cell===2,
+            value4:cell===4,
             value8:cell===8,
             value16:cell===16,
             value32:cell===32,

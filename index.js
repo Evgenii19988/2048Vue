@@ -42,6 +42,32 @@ const App = {
       ] = randomCellValue();
     },
 
+    stepBack() {
+      this.table = this.prevTable;
+    },
+
+    rebootGame() {
+      this.table = [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ];
+      this.fillCell();
+    },
+
     moveOneCell(a, b, c, d) {},
 
     moveTwoCell(cell1, cell2, cell3, cell4) {},
@@ -175,6 +201,8 @@ const App = {
 
     putRigth() {}
   },
+
+  watch: {},
 
   mounted() {
     this.fillCell(16);

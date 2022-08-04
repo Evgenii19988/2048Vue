@@ -95,6 +95,24 @@ select {
 .management {
   display: flex;
   justify-content: center;
+  margin: 0 0 15px 0;
+}
+
+.managment__back {
+  background: url("/Image/back.png") 50% 50% no-repeat;
+  margin: 0 20px 0 0;
+}
+
+.managment__reboot {
+  background: url("/Image/reboot.png") 50% 50% no-repeat;
+}
+
+.button {
+  background-size: contain;
+  width: 50px;
+  height: 50px;
+  border: 0px;
+  cursor: pointer;
 }
 
 .game {

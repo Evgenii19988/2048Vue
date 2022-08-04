@@ -43,7 +43,9 @@ const App = {
     },
 
     stepBack() {
-      this.table = this.prevTable;
+      if (this.prevTable.length > 0) {
+        this.table = this.prevTable;
+      }
     },
 
     rebootGame() {
@@ -191,15 +193,7 @@ const App = {
           this.table.splice(a, 1, null);
         }
       }
-    },
-
-    putLeft() {
-      this.fillCell(16);
-    },
-
-    putUp() {},
-
-    putRigth() {}
+    }
   },
 
   watch: {},

@@ -15,8 +15,11 @@
     <div class="wrapper">
       <div class="title">2048</div>
       <div class="management">
-        <button v-on:click="rebootGame" class="reboot">Заново</button>
-        <button v-on:click="stepBack">Назад</button>
+        <button v-on:click="stepBack" class="managment__back button"></button>
+        <button
+          v-on:click="rebootGame"
+          class="managment__reboot button"
+        ></button>
       </div>
       <div class="game">
         <div class="game__table">

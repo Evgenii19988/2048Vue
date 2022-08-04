@@ -27,7 +27,7 @@ const App = {
   },
 
   methods: {
-    /*Заполняет клетку 2 или 4*/
+    /*Заполняет пустую клетку 2 или 4*/
     fillCell() {
       const nullIndexes = [];
       this.table.forEach((value, idx) => {
@@ -70,128 +70,171 @@ const App = {
       this.fillCell();
     },
 
-    moveOneCell(a, b, c, d) {},
+    /*Изменяет каждое значение в ряду по индексу на необходимое*/
+    changeRow(idxA, idxB, idxC, idxD, newValA, newValB, newValC, newValD) {
+      this.table.splice(idxA, 1, newValA);
+      this.table.splice(idxB, 1, newValB);
+      this.table.splice(idxC, 1, newValC);
+      this.table.splice(idxD, 1, newValD);
+    },
 
-    moveTwoCell(cell1, cell2, cell3, cell4) {},
+    moveCells(idxA, idxB, idxC, idxD) {
+      const valueA = this.table[idxA];
+      const valueB = this.table[idxB];
+      const valueC = this.table[idxC];
+      const valueD = this.table[idxD];
 
-    moveThreeCell(cell1, cell2, cell3, cell4) {},
+      const fullCells = [valueA, valueB, valueC, valueD].filter(
+        (val) => val !== null
+      );
 
-    moveFourCell(cell1, cell2, cell3, cell4) {},
-
-    moveCells(a, b, c, d) {
-      const valueA = this.table[a];
-      const valueB = this.table[b];
-      const valueC = this.table[c];
-      const valueD = this.table[d];
-      const idxArray = [a, b, c, d];
-      if ([valueA, valueB, valueC, valueD].length === 0) {
-        return;
-      }
-      /*Если 1 значение в строке*/
-      if (
-        [valueA, valueB, valueC, valueD].filter((val) => val !== null)
-          .length === 1
-      ) {
-        if (this.table[d] !== null) return;
-
-        const cellValue = [valueA, valueB, valueC, valueD].filter(
-          (val) => val !== null
-        );
-
-        const deleteIndex = [valueA, valueB, valueC, valueD].findIndex(
-          (val) => val !== null
-        );
-
-        this.table.splice(d, 1, Number(cellValue));
-
-        this.table.splice(idxArray[deleteIndex], 1, null);
-      }
-
-      /*Если 2 значения в строке*/
-      if (
-        [valueA, valueB, valueC, valueD].filter((val) => val !== null)
-          .length === 2
-      ) {
-        const fullCells = [valueA, valueB, valueC, valueD].filter(
-          (val) => val !== null
-        );
-        if (fullCells[0] === fullCells[1]) {
-          this.table.splice(d, 1, fullCells[0] * 2);
-          this.table.splice(a, 1, null);
-          this.table.splice(b, 1, null);
-          this.table.splice(c, 1, null);
-        } else {
-          this.table.splice(d, 1, fullCells[1]);
-          this.table.splice(c, 1, fullCells[0]);
-          this.table.splice(a, 1, null);
-          this.table.splice(b, 1, null);
-        }
-      }
-
-      /*Если 3 значения в строке*/
-      if (
-        [this.table[a], this.table[b], this.table[c], this.table[d]].filter(
-          (val) => val !== null
-        ).length === 3
-      ) {
-        const fullCells = [valueA, valueB, valueC, valueD].filter(
-          (val) => val !== null
-        );
-        if (fullCells[1] === fullCells[2]) {
-          this.table.splice(d, 1, fullCells[2] * 2);
-          this.table.splice(c, 1, fullCells[0]);
-          this.table.splice(a, 1, null);
-          this.table.splice(b, 1, null);
+      switch (fullCells.length) {
+        case 0:
           return;
-        }
-        if (fullCells[0] === fullCells[1]) {
-          this.table.splice(d, 1, fullCells[2]);
-          this.table.splice(c, 1, fullCells[0] * 2);
-          this.table.splice(a, 1, null);
-          this.table.splice(b, 1, null);
-        }
-        if (fullCells[0] !== fullCells[1] && fullCells[1] !== fullCells[2]) {
-          this.table.splice(d, 1, fullCells[2]);
-          this.table.splice(c, 1, fullCells[1]);
-          this.table.splice(b, 1, fullCells[0]);
-          this.table.splice(a, 1, null);
-        }
-      }
+          break;
+        case 1:
+          this.changeRow(
+            idxA,
+            idxB,
+            idxC,
+            idxD,
+            null,
+            null,
+            null,
+            fullCells[0]
+          );
+          break;
+        case 2:
+          if (fullCells[0] === fullCells[1]) {
+            this.changeRow(
+              idxA,
+              idxB,
+              idxC,
+              idxD,
+              null,
+              null,
+              null,
+              fullCells[0] * 2
+            );
+          } else {
+            this.changeRow(
+              idxA,
+              idxB,
+              idxC,
+              idxD,
+              null,
+              null,
+              fullCells[0],
+              fullCells[1]
+            );
+          }
+          break;
+        case 3:
+          if (fullCells[1] === fullCells[2]) {
+            this.changeRow(
+              idxA,
+              idxB,
+              idxC,
+              idxD,
+              null,
+              null,
+              fullCells[0],
+              fullCells[2] * 2
+            );
+            return;
+          }
+          if (fullCells[0] === fullCells[1]) {
+            this.changeRow(
+              idxA,
+              idxB,
+              idxC,
+              idxD,
+              null,
+              null,
+              fullCells[0] * 2,
+              fullCells[2]
+            );
+          }
+          if (fullCells[0] !== fullCells[1] && fullCells[1] !== fullCells[2]) {
+            this.changeRow(
+              idxA,
+              idxB,
+              idxC,
+              idxD,
+              null,
+              fullCells[0],
+              fullCells[1],
+              fullCells[2]
+            );
+          }
+          break;
+        case 4:
+          if (valueA !== valueB && valueB !== valueC && valueC !== valueD)
+            return;
 
-      /*Если 4 значения в строке*/
-      if (
-        [this.table[a], this.table[b], this.table[c], this.table[d]].filter(
-          (val) => val !== null
-        ).length === 4
-      ) {
-        if (valueA !== valueB && valueB !== valueC && valueC !== valueD) return;
-
-        if (valueD === valueC && valueA !== valueB) {
-          this.table.splice(d, 1, valueD * 2);
-          this.table.splice(c, 1, valueB);
-          this.table.splice(b, 1, valueA);
-          this.table.splice(a, 1, null);
-        }
-        if (valueD === valueC && valueA === valueB) {
-          this.table.splice(d, 1, valueD * 2);
-          this.table.splice(c, 1, valueB * 2);
-          this.table.splice(b, 1, null);
-          this.table.splice(a, 1, null);
-        }
-        if (valueD !== valueC && valueA === valueB && valueB !== valueC) {
-          this.table.splice(b, 1, valueB * 2);
-          this.table.splice(a, 1, null);
-        }
-        if (valueD !== valueC && valueA === valueB && valueB === valueC) {
-          this.table.splice(c, 1, valueC * 2);
-          this.table.splice(b, 1, valueA);
-          this.table.splice(a, 1, null);
-        }
-        if (valueA !== valueB && valueC !== valueD && valueB === valueC) {
-          this.table.splice(c, 1, valueB * 2);
-          this.table.splice(b, 1, valueA);
-          this.table.splice(a, 1, null);
-        }
+          if (valueD === valueC && valueA !== valueB) {
+            this.changeRow(
+              idxA,
+              idxB,
+              idxC,
+              idxD,
+              null,
+              valueA,
+              valueB,
+              valueD * 2
+            );
+          }
+          if (valueD === valueC && valueA === valueB) {
+            this.changeRow(
+              idxA,
+              idxB,
+              idxC,
+              idxD,
+              null,
+              null,
+              valueB * 2,
+              valueD * 2
+            );
+          }
+          if (valueD !== valueC && valueA === valueB && valueB !== valueC) {
+            this.changeRow(
+              idxA,
+              idxB,
+              idxC,
+              idxD,
+              null,
+              valueB * 2,
+              valueC,
+              valueD
+            );
+          }
+          if (valueD !== valueC && valueA === valueB && valueB === valueC) {
+            this.changeRow(
+              idxA,
+              idxB,
+              idxC,
+              idxD,
+              null,
+              valueA,
+              valueC * 2,
+              valueD
+            );
+          }
+          if (valueA !== valueB && valueC !== valueD && valueB === valueC) {
+            this.changeRow(
+              idxA,
+              idxB,
+              idxC,
+              idxD,
+              null,
+              valueA,
+              valueB * 2,
+              valueD
+            );
+          }
+          break;
+        default:
+          return;
       }
     }
   },

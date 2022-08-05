@@ -98,6 +98,17 @@ select {
   margin: 0 0 15px 0;
 }
 
+.score {
+  display: flex;
+  justify-content: center;
+}
+
+.score__item {
+  width: 653px;
+  margin: 0 0 15px 0;
+  font-size: 20px;
+}
+
 .managment__back {
   background: url("/Image/back.png") 50% 50% no-repeat;
   margin: 0 20px 0 0;

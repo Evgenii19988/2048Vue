@@ -22,7 +22,9 @@ const App = {
         null,
         null
       ],
-      prevTable: []
+      prevTable: [],
+
+      score: 0
     };
   },
 
@@ -46,6 +48,10 @@ const App = {
       if (this.prevTable.length > 0) {
         this.table = this.prevTable;
       }
+    },
+
+    raiseScore(value) {
+      this.score += value;
     },
 
     rebootGame() {
@@ -91,7 +97,7 @@ const App = {
       switch (fullCells.length) {
         case 0:
           return;
-          break;
+
         case 1:
           this.changeRow(
             idxA,
@@ -104,6 +110,7 @@ const App = {
             fullCells[0]
           );
           break;
+
         case 2:
           if (fullCells[0] === fullCells[1]) {
             this.changeRow(
@@ -116,6 +123,7 @@ const App = {
               null,
               fullCells[0] * 2
             );
+            this.raiseScore(fullCells[0] * 2);
           } else {
             this.changeRow(
               idxA,
@@ -129,6 +137,7 @@ const App = {
             );
           }
           break;
+
         case 3:
           if (fullCells[1] === fullCells[2]) {
             this.changeRow(
@@ -141,6 +150,7 @@ const App = {
               fullCells[0],
               fullCells[2] * 2
             );
+            this.raiseScore(fullCells[2] * 2);
             return;
           }
           if (fullCells[0] === fullCells[1]) {
@@ -154,6 +164,7 @@ const App = {
               fullCells[0] * 2,
               fullCells[2]
             );
+            this.raiseScore(fullCells[0] * 2);
           }
           if (fullCells[0] !== fullCells[1] && fullCells[1] !== fullCells[2]) {
             this.changeRow(
@@ -168,6 +179,7 @@ const App = {
             );
           }
           break;
+
         case 4:
           if (valueA !== valueB && valueB !== valueC && valueC !== valueD)
             return;
@@ -183,6 +195,7 @@ const App = {
               valueB,
               valueD * 2
             );
+            this.raiseScore(valueD * 2);
           }
           if (valueD === valueC && valueA === valueB) {
             this.changeRow(
@@ -195,6 +208,8 @@ const App = {
               valueB * 2,
               valueD * 2
             );
+            this.raiseScore(valueB * 2);
+            this.raiseScore(valueD * 2);
           }
           if (valueD !== valueC && valueA === valueB && valueB !== valueC) {
             this.changeRow(
@@ -207,6 +222,7 @@ const App = {
               valueC,
               valueD
             );
+            this.raiseScore(valueB * 2);
           }
           if (valueD !== valueC && valueA === valueB && valueB === valueC) {
             this.changeRow(
@@ -219,6 +235,7 @@ const App = {
               valueC * 2,
               valueD
             );
+            this.raiseScore(valueC * 2);
           }
           if (valueA !== valueB && valueC !== valueD && valueB === valueC) {
             this.changeRow(
@@ -231,6 +248,7 @@ const App = {
               valueB * 2,
               valueD
             );
+            this.raiseScore(valueB * 2);
           }
           break;
         default:

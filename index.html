@@ -12,22 +12,34 @@
     <title><2048></title>
   </head>
   <body>
-    <div class="wrapper">
-      <h1 class="title">2048</h1>
-      <div class="management">
-        <button v-on:click="stepBack" class="managment__back button"></button>
-        <button
-          v-on:click="rebootGame"
-          class="managment__reboot button"
-        ></button>
+    <div id="app">
+      <div v-if="showMessage" class="message">
+        <div class="message__title">
+          Вы уверены что хотите начать игру заново?
+        </div>
+        <div class="message__button">
+          <button v-on:click="rebootGame" class="message__yes">Да</button>
+          <button v-on:click="this.showMessage = false" class="message__no">
+            Нет
+          </button>
+        </div>
       </div>
-      <div class="score">
-        <div class="score__item">Score: {{this.score}}</div>
-      </div>
-      <div class="game">
-        <div class="game__table">
-          <div
-            v-bind:class="{value2:cell===2,
+      <div class="wrapper">
+        <h1 class="title">2048</h1>
+        <div class="management">
+          <button v-on:click="stepBack" class="managment__back button"></button>
+          <button
+            v-on:click="this.showMessage = true"
+            class="managment__reboot button"
+          ></button>
+        </div>
+        <div class="score">
+          <div class="score__item">Score: {{this.score}}</div>
+        </div>
+        <div class="game">
+          <div class="game__table">
+            <div
+              v-bind:class="{value2:cell===2,
             value4:cell===4,
             value8:cell===8,
             value16:cell===16,
@@ -38,11 +50,12 @@
             value512:cell===512,
             value1024:cell===1024,
             value2048:cell===2048}"
-            v-for="(cell, idx) in table"
-            :key="idx"
-            class="game__cell"
-          >
-            {{ cell }}
+              v-for="(cell, idx) in table"
+              :key="idx"
+              class="game__cell"
+            >
+              {{ cell }}
+            </div>
           </div>
         </div>
       </div>

@@ -24,7 +24,8 @@ const App = {
       ],
       prevTable: [],
 
-      score: 0
+      score: 0,
+      showMessage: false
     };
   },
 
@@ -75,6 +76,7 @@ const App = {
       ];
       this.fillCell();
       this.score = 0;
+      this.showMessage = false;
     },
 
     /*Изменяет каждое значение в ряду по индексу на необходимое*/
@@ -259,6 +261,7 @@ const App = {
   },
 
   watch: {},
+  created() {},
 
   mounted() {
     this.fillCell(16);
@@ -320,4 +323,4 @@ const App = {
   }
 };
 
-Vue.createApp(App).mount(".wrapper");
+Vue.createApp(App).mount("#app");

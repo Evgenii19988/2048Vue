@@ -187,3 +187,22 @@ select {
 .value2048 {
   background-color: #690404;
 }
+
+/*---Reboot Message---*/
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  border: 2px solid red;
+  width: 100vw;
+  height: 100vh;
+}
+.message__title {
+}
+.message__yes {
+}
+.message__no {
+}

@@ -14,15 +14,16 @@
   <body>
     <div id="app">
       <div v-if="showMessage" class="message">
-        <div class="message__title">
+        <h2 class="message__title">
           Вы уверены, что хотите начать новую игру?
-        </div>
-        <div class="message__button">
-          <button v-on:click="rebootGame" class="message__yes">Да</button>
-          <button v-on:click="this.showMessage = false" class="message__no">
+        </h2>
+        <div class="message__buttons">
+          <button v-on:click="rebootGame" class="message__button">Да</button>
+          <button v-on:click="this.showMessage = false" class="message__button">
             Нет
           </button>
         </div>
+        <div class="message__background"></div>
       </div>
       <div class="wrapper">
         <h1 class="title">2048</h1>

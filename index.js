@@ -5,8 +5,8 @@ const App = {
   data() {
     return {
       table: [
-        1024,
-        1024,
+        null,
+        null,
         null,
         null,
         null,

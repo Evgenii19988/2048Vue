@@ -13,24 +13,44 @@
   </head>
   <body>
     <div id="app">
-      <div v-if="showMessage" class="message">
-        <h2 class="message__title">
+      <!-- remove message -->
+      <div v-if="removeMessage" class="message remove-message">
+        <h2 class="remove-message__title">
           Вы уверены, что хотите начать новую игру?
         </h2>
-        <div class="message__buttons">
-          <button v-on:click="rebootGame" class="message__button">Да</button>
-          <button v-on:click="this.showMessage = false" class="message__button">
+        <div class="remove-message__buttons">
+          <button v-on:click="rebootGame" class="remove-message__button">
+            Да
+          </button>
+          <button
+            v-on:click="this.removeMessage = false"
+            class="remove-message__button"
+          >
             Нет
           </button>
         </div>
-        <div class="message__background"></div>
+        <div class="remove-message__background"></div>
       </div>
+      <!-- win message -->
+      <div v-if="winMessage" class="message win-message">
+        <h2 class="win-message__title">С ПОБЕДОЙ!!!</h2>
+        <div class="win-message__buttons">
+          <button v-on:click="rebootGame" class="win-message__button">
+            Заново
+          </button>
+          <button v-on:click="continueGame()" class="win-message__button">
+            Продолжить
+          </button>
+        </div>
+        <div class="win-message__background"></div>
+      </div>
+
       <div class="wrapper">
         <h1 class="title">2048</h1>
         <div class="management">
           <button v-on:click="stepBack" class="managment__back button"></button>
           <button
-            v-on:click="this.showMessage = true"
+            v-on:click="this.removeMessage = true"
             class="managment__reboot button"
           ></button>
         </div>

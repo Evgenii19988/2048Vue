@@ -114,8 +114,18 @@ select {
   margin: 0 20px 0 0;
 }
 
+.managment__back:hover {
+  background-color: #9e9d9d;
+  border-radius: 0.5em;
+}
+
 .managment__reboot {
   background: url("/Image/reboot.png") 50% 50% no-repeat;
+}
+
+.managment__reboot:hover {
+  background-color: #9e9d9d;
+  border-radius: 1em;
 }
 
 .button {
@@ -199,14 +209,14 @@ select {
   width: 100vw;
   height: 100vh;
 }
-.message__title {
+.remove-message__title {
   font-family: "DM Sans", sans-serif;
 }
-.message__buttons {
+.remove-message__buttons {
   display: flex;
   gap: 20px;
 }
-.message__button {
+.remove-message__button {
   color: #526f77;
   padding: 10px 40px;
   text-decoration: none;
@@ -226,16 +236,65 @@ select {
   font: 400 18px tahoma;
   border: 1px solid #43444e;
 }
-.message__button:hover {
+.remove-message__button:hover {
   background-position: 0 0;
   color: #fff;
 }
 
-.message__background {
+.remove-message__background {
   position: absolute;
   background-color: #9e9d9d;
   opacity: 0.6;
   width: 100vw;
   height: 100vh;
   z-index: -1;
+}
+
+/*---Win Message---*/
+
+.win-message__title {
+  margin: -6em 0 0 0;
+  font-size: 5rem;
+  color: #c3210f;
+}
+
+.win-message__background {
+  background: url("/Image/beer.png") 50% 50% no-repeat;
+  background-size: cover;
+  position: absolute;
+  opacity: 1;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+.win-message__buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.win-message__button {
+  color: #526f77;
+  padding: 10px 40px;
+  text-decoration: none;
+  text-align: center;
+  margin: 20px auto;
+  display: block;
+  background-image: linear-gradient(
+    to left,
+    transparent,
+    transparent 50%,
+    #c3210f 50%,
+    #c3210f
+  );
+  background-position: 100% 0;
+  background-size: 200% 100%;
+
+  font: 400 18px tahoma;
+  border: 1px solid #43444e;
+}
+
+.win-message__button:hover {
+  background-position: 0 0;
+  color: #fff;
 }

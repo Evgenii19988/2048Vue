@@ -5,8 +5,8 @@ const App = {
   data() {
     return {
       table: [
-        null,
-        null,
+        1024,
+        1024,
         null,
         null,
         null,
@@ -25,7 +25,10 @@ const App = {
       prevTable: [],
 
       score: 0,
-      showMessage: false
+
+      removeMessage: false,
+      winMessage: false,
+      wasPressedContinue: false
     };
   },
 
@@ -55,6 +58,17 @@ const App = {
       this.score += value;
     },
 
+    showWinMessage() {
+      if (this.table.includes(2048) && !this.wasPressedContinue) {
+        this.winMessage = true;
+      }
+    },
+
+    continueGame() {
+      this.wasPressedContinue = true;
+      this.winMessage = false;
+    },
+
     rebootGame() {
       this.table = [
         null,
@@ -76,7 +90,8 @@ const App = {
       ];
       this.fillCell();
       this.score = 0;
-      this.showMessage = false;
+      this.removeMessage = false;
+      this.winMessage = false;
     },
 
     /*Изменяет каждое значение в ряду по индексу на необходимое*/
@@ -273,6 +288,7 @@ const App = {
           this.moveCells(1, 5, 9, 13);
           this.moveCells(2, 6, 10, 14);
           this.moveCells(3, 7, 11, 15);
+          this.showWinMessage();
 
           if (
             !(JSON.stringify(this.prevTable) === JSON.stringify(this.table))
@@ -286,6 +302,7 @@ const App = {
           this.moveCells(7, 6, 5, 4);
           this.moveCells(11, 10, 9, 8);
           this.moveCells(15, 14, 13, 12);
+          this.showWinMessage();
           if (
             !(JSON.stringify(this.prevTable) === JSON.stringify(this.table))
           ) {
@@ -298,6 +315,7 @@ const App = {
           this.moveCells(13, 9, 5, 1);
           this.moveCells(14, 10, 6, 2);
           this.moveCells(15, 11, 7, 3);
+          this.showWinMessage();
           if (
             !(JSON.stringify(this.prevTable) === JSON.stringify(this.table))
           ) {
@@ -310,6 +328,7 @@ const App = {
           this.moveCells(4, 5, 6, 7);
           this.moveCells(8, 9, 10, 11);
           this.moveCells(12, 13, 14, 15);
+          this.showWinMessage();
           if (
             !(JSON.stringify(this.prevTable) === JSON.stringify(this.table))
           ) {

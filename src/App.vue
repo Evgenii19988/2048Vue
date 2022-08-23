@@ -527,6 +527,7 @@ select {
 .managment__back:hover {
   background-color: #9e9d9d;
   border-radius: 0.5em;
+  transition-duration: 0.5s;
 }
 
 .managment__reboot {
@@ -535,7 +536,8 @@ select {
 
 .managment__reboot:hover {
   background-color: #9e9d9d;
-  border-radius: 1em;
+  border-radius: 0.5em;
+  transition-duration: 0.5s;
 }
 
 .button {

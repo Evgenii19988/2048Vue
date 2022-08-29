@@ -11,6 +11,8 @@
     v-on:continue-game="continueGame()"
   />
 
+  <loss-message v-if="hasLossMessage" v-on:reboot-game="rebootGame()" />
+
   <div class="wrapper">
     <h1 class="title">2048</h1>
     <div class="management">
@@ -56,11 +58,13 @@ import { randomCellNumber } from "./randomizer.js";
 
 import RemoveMessage from "/src/components/RemoveMessage.vue";
 import WinMessage from "/src/components/WinMessage.vue";
+import LossMessage from "/src/components/LossMessage.vue";
 
 export default {
   components: {
     RemoveMessage,
     WinMessage,
+    LossMessage,
   },
 
   data() {
@@ -91,6 +95,7 @@ export default {
       hasRemoveMessage: false,
 
       hasWinMessage: false,
+      hasLossMessage: true,
       wasPressedContinue: false,
     };
   },
@@ -106,15 +111,14 @@ export default {
       });
       if (nullIndexes.length === []) return;
 
-      this.table[
-        nullIndexes[randomCellNumber(nullIndexes.length) - 1]
-      ] = randomCellValue();
+      this.table[nullIndexes[randomCellNumber(nullIndexes.length) - 1]] =
+        randomCellValue();
     },
 
     stepBack() {
       if (this.prevTable.length > 0) {
         this.table = this.prevTable;
-        this.score = this.prevScore
+        this.score = this.prevScore;
       }
     },
 
@@ -127,6 +131,38 @@ export default {
       if (this.table.includes(2048) && !this.wasPressedContinue) {
         this.hasWinMessage = true;
       }
+    },
+
+    showLossMessage() {
+      if (this.table.includes(null)) return;
+      const loseArray = [];
+      this.table.forEach(function (item, idx, array) {
+        if ([3, 7, 11, 15].includes(idx)) {
+          if (
+            item !== array[idx - 1] &&
+            item !== array[idx - 4] &&
+            item !== array[idx + 4]
+          ) {
+            loseArray.push(idx);
+          }
+        } else if ([0, 4, 8, 12].includes(idx)) {
+          if (
+            item !== array[idx + 1] &&
+            item !== array[idx - 4] &&
+            item !== array[idx + 4]
+          ) {
+            loseArray.push(idx);
+          }
+        } else if (
+          item !== array[idx - 1] &&
+          item !== array[idx + 1] &&
+          item !== array[idx - 4] &&
+          item !== array[idx + 4]
+        ) {
+          loseArray.push(idx);
+        }
+      });
+      this.hasLossMessage = loseArray.length === 16 ? true : false;
     },
 
     continueGame() {
@@ -157,6 +193,7 @@ export default {
       this.score = 0;
       this.hasRemoveMessage = false;
       this.hasWinMessage = false;
+      this.hasLossMessage = false;
     },
 
     /*Изменяет каждое значение в ряду по индексу на необходимое*/
@@ -354,6 +391,7 @@ export default {
           this.moveCells(2, 6, 10, 14);
           this.moveCells(3, 7, 11, 15);
           this.showWinMessage();
+          this.showLossMessage();
 
           if (
             !(JSON.stringify(this.prevTable) === JSON.stringify(this.table))
@@ -368,6 +406,8 @@ export default {
           this.moveCells(11, 10, 9, 8);
           this.moveCells(15, 14, 13, 12);
           this.showWinMessage();
+          this.showLossMessage();
+
           if (
             !(JSON.stringify(this.prevTable) === JSON.stringify(this.table))
           ) {
@@ -381,6 +421,8 @@ export default {
           this.moveCells(14, 10, 6, 2);
           this.moveCells(15, 11, 7, 3);
           this.showWinMessage();
+          this.showLossMessage();
+
           if (
             !(JSON.stringify(this.prevTable) === JSON.stringify(this.table))
           ) {
@@ -394,6 +436,8 @@ export default {
           this.moveCells(8, 9, 10, 11);
           this.moveCells(12, 13, 14, 15);
           this.showWinMessage();
+          this.showLossMessage();
+
           if (
             !(JSON.stringify(this.prevTable) === JSON.stringify(this.table))
           ) {

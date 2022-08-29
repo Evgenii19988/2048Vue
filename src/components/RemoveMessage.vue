@@ -53,10 +53,12 @@ export default {
 
   font: 400 18px tahoma;
   border: 1px solid #43444e;
+  border-radius: 0.5rem;
 }
 .remove-message__button:hover {
   background-position: 0 0;
   color: #fff;
+  transition-duration: 0.5s;
 }
 
 .remove-message__background {
